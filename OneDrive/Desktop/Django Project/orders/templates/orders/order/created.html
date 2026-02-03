@@ -1,0 +1,12 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Thank You{% endblock %}
+
+{% block content %}
+<div class="checkout-container" style="text-align: center; padding: 5rem 2rem;">
+    <h1 class="section-title" style="color: var(--primary-color);">Thank You!</h1>
+    <p style="font-size: 2rem; margin-bottom: 2rem;">Your order has been successfully placed.</p>
+    <p style="font-size: 1.6rem; color: #666;">Order number: <strong>{{ order.id }}</strong></p>
+    <a href="{% url 'shop:product_list' %}" class="btn" style="margin-top: 3rem;">Continue Shopping</a>
+</div>
+{% endblock %}

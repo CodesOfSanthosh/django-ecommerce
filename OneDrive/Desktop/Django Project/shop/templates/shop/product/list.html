@@ -1,0 +1,73 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}
+{% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Sidebar -->
+    <div class="col-lg-3 mb-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white fw-bold">Categories</div>
+            <div class="list-group list-group-flush">
+                <a href="{% url 'shop:product_list' %}"
+                    class="list-group-item list-group-item-action {% if not category %}active bg-dark border-dark{% endif %}">
+                    All Products
+                </a>
+                {% for c in categories %}
+                <a href="{{ c.get_absolute_url }}"
+                    class="list-group-item list-group-item-action {% if category.slug == c.slug %}active bg-dark border-dark{% endif %}">
+                    {{ c.name }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="col-lg-9">
+        <h2 class="mb-4 fw-bold">{% if category %}{{ category.name }}{% else %}All Products{% endif %}</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for product in products %}
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm product-card transition-hover">
+                    <div
+                        class="card-body py-5 d-flex flex-column align-items-center justify-content-center bg-light text-center">
+                        {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid mb-3"
+                            style="max-height: 200px; object-fit: contain;">
+                        {% else %}
+                        <i class="fas fa-box-open text-muted mb-3" style="font-size: 3rem; opacity: 0.3;"></i>
+                        {% endif %}
+                        <h5 class="card-title text-truncate w-100">
+                            <a href="{{ product.get_absolute_url }}" class="text-dark text-decoration-none fw-bold">
+                                {{ product.name }}
+                            </a>
+                        </h5>
+                        <p class="card-text text-primary fw-bold fs-4 mb-0">${{ product.price }}</p>
+                    </div>
+                    <div class="card-footer bg-white border-0 pt-0 pb-4 px-4">
+                        <a href="{{ product.get_absolute_url }}" class="btn btn-outline-dark w-100 rounded-pill">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .transition-hover {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .transition-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+</style>
+{% endblock %}
