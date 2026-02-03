@@ -40,16 +40,15 @@
                     </div>
                     {# Correct approach: render the visible django form field with a class #}
                     <div class="d-none">
-                        <!-- Fallback if form rendering is complex, but actually let's re-do the form part simpler below -->
+                        
                     </div>
                 </form>
 
-                <!-- Proper Django Form Rendering -->
+                
                 <form action="{% url 'cart:cart_add' product.id %}" method="post" class="row align-items-end g-3">
                     {% csrf_token %}
                     <div class="col-auto">
-                        <!-- Since we want to style the selector, we can just let it be standard or wrap it -->
-                        <!-- For simplicity in this quick refactor, we just render it. Django defaults are ok, but let's try to style it via CSS if needed, or simple display -->
+                      
                         {{ cart_product_form.quantity }}
                         {{ cart_product_form.override }}
                     </div>
