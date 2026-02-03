@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="row">
-    <!-- Order Summary -->
+
     <div class="col-md-5 order-md-2 mb-4">
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-white fw-bold py-3">Your Order Order</div>
@@ -34,15 +34,11 @@
                 <form action="." method="post" class="needs-validation" novalidate>
                     {% csrf_token %}
                     <div class="row g-3">
-                        <!-- Manually rendering fields to apply bootstrap classes simply by iterating -->
+                      
                         {% for field in form %}
                         <div class="col-12">
                             <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                            <!-- Hacky way to add class without widget tweaks: wrap in div but we can't easily inject class into input tag itself in django template without filter.
-                                  However, modern browsers handle default inputs decently. Let's try to pass 'form-control' in python if possible, or just default.
-                                  Actually, let's assume default rendering for speed, or overwrite widgets in forms.py later.
-                                  Current plan: Just render field. We will do a quick forms.py update next to add 'form-control' class.
-                             -->
+                            
                             {{ field }}
                             {% if field.errors %}
                             <div class="text-danger small mt-1">{{ field.errors }}</div>
