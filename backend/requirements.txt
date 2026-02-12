@@ -2,7 +2,7 @@
 Django>=5.0.0
 djangorestframework
 django-cors-headers
-gunicorn
+gunicorn; sys_platform != 'win32'
 whitenoise
 dj-database-url
 psycopg2-binary
