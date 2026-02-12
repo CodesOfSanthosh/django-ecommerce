@@ -1,6 +1,7 @@
 import React from 'react'
 import { useActionState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
+import API_URL from '../config';
 
 //   return data.message || " Failed to Apply"
 export default function ApplyJobPage() {
@@ -15,7 +16,7 @@ export default function ApplyJobPage() {
 
   async function applyJobAction(_, fromData) {
     try {
-      const response = await fetch('http://127.0.0.1:8000/apply', {
+      const response = await fetch(`${API_URL}/apply`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",

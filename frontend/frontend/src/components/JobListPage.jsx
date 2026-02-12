@@ -1,18 +1,21 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom';
+import API_URL from '../config';
+
 export default function JobListPage() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const username = localStorage.getItem("username");
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/jobs")
+    fetch(`${API_URL}/jobs`)
       .then(res => res.json())
       .then(data => {
         setJobs(data);
         setLoading(false);
       })
       .catch(err => {
+
         console.error("Failed to fetch jobs:", err);
         setLoading(false);
       })

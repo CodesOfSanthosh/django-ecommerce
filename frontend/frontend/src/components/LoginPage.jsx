@@ -1,8 +1,10 @@
 import React, { useActionState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import API_URL from '../config';
+
 async function loginAction(_, fromData) {
   const json = Object.fromEntries(fromData);
-  const response = await fetch('http://localhost:8000/login', {
+  const response = await fetch(`${API_URL}/login`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json"
